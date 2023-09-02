@@ -11,6 +11,9 @@ app.use(cookieParser());
 app.use(cors());
 // ----------  routes ----------
 
+app.get("/", (req, res) => {
+  res.send("its all good");
+});
 app.use("/api/v1/applications", applicationRouter);
 app.use("/api/v1/user", userRouter);
 
