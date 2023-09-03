@@ -11,8 +11,10 @@ interface Error {
 class AppError extends Error {
   constructor(message: string, statusCode: number) {
     super(message);
+    // @ts-ignore
     this.statusCode = statusCode;
-    this.status = `${statusCode}`.startsWith("4") ? "error" : "fail";
+    // @ts-ignore
+    this.status = `${statusCode}`.startsWith("4") ? "error" : "fail"; // @ts-ignore
     this.isOperational = true;
     Error.captureStackTrace(this, this.constructor);
   }

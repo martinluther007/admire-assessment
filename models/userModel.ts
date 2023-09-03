@@ -2,7 +2,7 @@ import { Schema, model, Types, Document } from "mongoose";
 import validator from "validator";
 import bcrypt from "bcryptjs";
 
-export interface Iuser extends Document {
+interface Iuser extends Document {
   name: string;
   email: string;
   password: string;
@@ -16,6 +16,7 @@ const userSchema = new Schema<Iuser>({
     required: [true, "A user must have a name"],
     // unique: true,
   },
+  // @ts-ignore
   email: {
     type: String,
     required: [true, "A user must have an email"],
@@ -35,6 +36,8 @@ const userSchema = new Schema<Iuser>({
 
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
+  // @ts-ignore
+
   this.password = await bcrypt.hash(this.password, 12);
 });
 
